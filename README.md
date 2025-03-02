@@ -1,3 +1,18 @@
+環境構築手順
+1.プロジェクトをクローン
+2.クローンしたプロジェクト内のdocker-compose.ymlファイルを編集する。
+　・4行目の「context:」の左側に自身のローカル環境でのフロントエンドプロジェクトのパスを記載。（絶対パスでも相対パスでもよい→相対パスの場合はdocker-compose.ymlから見た相対パスを記載）
+  ・9行目も上記と同様に修正（「:/app」の記載はそのまま残す）
+  ・19行目「build:」の左側にバックエンドプロジェクトのパスを記載。フロントエンドと同様の修正を行う。
+  ・24行目も上記と同様に修正（「:/app」の記載はそのまま残す）
+3.docker-compose.ymlがあるディレクトリにて以下のコマンドを実行。（ローカル環境にDocker Desktopをインストールしていない場合は、先にインストールを行う）
+docker-compose up --build
+4.localhost:3000にて正常にアプリケーションが実行できていることを確認
+5.docker終了
+ 1 「Ctrl+C」をターミナル上で入力するとdockerがstopする
+ 2 以下コマンドを入力して、dockerコンテナを削除
+  
+
 ## [Devias Kit - React](https://material-kit-react.devias.io/)
 
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
