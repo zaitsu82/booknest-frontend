@@ -11,8 +11,8 @@
   docker-compose up --build<br>
 4.localhost:3000にて正常にアプリケーションが実行できていることを確認<br>
 5.docker終了<br>
- 1 「Ctrl+C」をターミナル上で入力するとdockerがstopする<br>
- 2 以下コマンドを入力して、dockerコンテナを削除<br>
+5.1「Ctrl+C」をターミナル上で入力するとdockerがstopする<br>
+5.2以下コマンドを入力して、dockerコンテナを削除<br>
   
 
 ## [Devias Kit - React](https://material-kit-react.devias.io/)
