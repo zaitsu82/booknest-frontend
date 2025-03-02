@@ -14,9 +14,8 @@
 4.localhost:3000にて正常にアプリケーションが実行できていることを確認<br>
 <br>
 5.docker終了<br>
-<br>
-5.1「Ctrl+C」をターミナル上で入力するとdockerがstopする<br>
-5.2コマンド「docker-compose rm」を入力して、dockerコンテナを削除<br>
+①「Ctrl+C」をターミナル上で入力するとdockerがstopする<br>
+②コマンド「docker-compose rm」を入力して、dockerコンテナを削除<br>
   
 
 ## [Devias Kit - React](https://material-kit-react.devias.io/)
