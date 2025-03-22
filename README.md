@@ -30,7 +30,7 @@
 
 - [Dashboard](https://material-kit-react.devias.io)
 - [Customers](https://material-kit-react.devias.io/dashboard/customers)
-- [Integrations](https://material-kit-react.devias.io/dashboard/integrations)
+- [myBooks](https://material-kit-react.devias.io/dashboard/myBooks)
 - [Settings](https://material-kit-react.devias.io/dashboard/settings)
 - [Account](https://material-kit-react.devias.io/dashboard/account)
 - [Sign In](https://material-kit-react.devias.io/auth/sign-in)
