@@ -21,16 +21,15 @@ import { authClient } from '@/lib/auth/client';
 import { useUser } from '@/hooks/use-user';
 
 const schema = zod.object({
-  firstName: zod.string().min(1, { message: 'First name is required' }),
-  lastName: zod.string().min(1, { message: 'Last name is required' }),
-  email: zod.string().min(1, { message: 'Email is required' }).email(),
-  password: zod.string().min(6, { message: 'Password should be at least 6 characters' }),
-  terms: zod.boolean().refine((value) => value, 'You must accept the terms and conditions'),
+  firstName: zod.string().min(1, { message: '姓は必須です。' }),
+  lastName: zod.string().min(1, { message: '名は必須です。' }),
+  email: zod.string().min(1, { message: 'メールアドレスは必須です。' }).email(),
+  password: zod.string().min(6, { message: 'パスワードは6文字以上にしてください。' }),
 });
 
 type Values = zod.infer<typeof schema>;
 
-const defaultValues = { firstName: '', lastName: '', email: '', password: '', terms: false } satisfies Values;
+const defaultValues = { firstName: '', lastName: '', email: '', password: '' } satisfies Values;
 
 export function SignUpForm(): React.JSX.Element {
   const router = useRouter();
