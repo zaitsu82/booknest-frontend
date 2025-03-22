@@ -12,13 +12,13 @@ import { Upload as UploadIcon } from '@phosphor-icons/react/dist/ssr/Upload';
 import dayjs from 'dayjs';
 
 import { config } from '@/config';
-import { IntegrationCard } from '@/components/dashboard/integrations/integrations-card';
-import type { Integration } from '@/components/dashboard/integrations/integrations-card';
-import { CompaniesFilters } from '@/components/dashboard/integrations/integrations-filters';
+import { MyBooksCard } from '@/components/dashboard/myBooks/myBooks-card';
+import type { MyBooks } from '@/components/dashboard/myBooks/myBooks-card';
+import { CompaniesFilters } from '@/components/dashboard/myBooks/myBooks-filters';
 
-export const metadata = { title: `Integrations | Dashboard | ${config.site.name}` } satisfies Metadata;
+export const metadata = { title: `myBooks | Dashboard | ${config.site.name}` } satisfies Metadata;
 
-const integrations = [
+const myBooks = [
   {
     id: 'INTEG-006',
     title: 'Dropbox',
@@ -67,14 +67,14 @@ const integrations = [
     installs: 435,
     updatedAt: dayjs().subtract(25, 'minute').subtract(6, 'hour').subtract(6, 'day').toDate(),
   },
-] satisfies Integration[];
+] satisfies MyBooks[];
 
 export default function Page(): React.JSX.Element {
   return (
     <Stack spacing={3}>
       <Stack direction="row" spacing={3}>
         <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
-          <Typography variant="h4">Integrations</Typography>
+          <Typography variant="h4">私の本棚</Typography>
           <Stack sx={{ alignItems: 'center' }} direction="row" spacing={1}>
             <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />}>
               Import
@@ -86,15 +86,15 @@ export default function Page(): React.JSX.Element {
         </Stack>
         <div>
           <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained">
-            Add
+            本の登録
           </Button>
         </div>
       </Stack>
       <CompaniesFilters />
       <Grid container spacing={3}>
-        {integrations.map((integration) => (
-          <Grid key={integration.id} lg={4} md={6} xs={12}>
-            <IntegrationCard integration={integration} />
+        {myBooks.map((MyBooks) => (
+          <Grid key={MyBooks.id} lg={4} md={6} xs={12}>
+            <MyBooksCard MyBooks={MyBooks} />
           </Grid>
         ))}
       </Grid>
