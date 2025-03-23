@@ -1,5 +1,6 @@
+"use client"; // 追加
+
 import * as React from 'react';
-import type { Metadata } from 'next';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
@@ -10,13 +11,10 @@ import { Download as DownloadIcon } from '@phosphor-icons/react/dist/ssr/Downloa
 import { Plus as PlusIcon } from '@phosphor-icons/react/dist/ssr/Plus';
 import { Upload as UploadIcon } from '@phosphor-icons/react/dist/ssr/Upload';
 import dayjs from 'dayjs';
-
-import { config } from '@/config';
+import { useRouter } from 'next/navigation';
 import { MyBooksCard } from '@/components/dashboard/myBooks/myBooks-card';
 import type { MyBooks } from '@/components/dashboard/myBooks/myBooks-card';
 import { CompaniesFilters } from '@/components/dashboard/myBooks/myBooks-filters';
-
-export const metadata = { title: `myBooks | Dashboard | ${config.site.name}` } satisfies Metadata;
 
 const myBooks = [
   {
@@ -70,6 +68,8 @@ const myBooks = [
 ] satisfies MyBooks[];
 
 export default function Page(): React.JSX.Element {
+  const router = useRouter(); // ✅ 修正: useRouter() を関数の中で呼び出す
+
   return (
     <Stack spacing={3}>
       <Stack direction="row" spacing={3}>
@@ -85,7 +85,11 @@ export default function Page(): React.JSX.Element {
           </Stack>
         </Stack>
         <div>
-          <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained">
+          <Button
+            startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />}
+            variant="contained"
+            onClick={() => router.push('/dashboard/myBooks/new')}
+          >
             本の登録
           </Button>
         </div>
