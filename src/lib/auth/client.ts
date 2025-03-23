@@ -1,6 +1,7 @@
 'use client';
 
 import type { User } from '@/types/user';
+import axios from 'axios';
 
 function generateToken(): string {
   const arr = new Uint8Array(12);
@@ -37,13 +38,28 @@ export interface ResetPasswordParams {
 }
 
 class AuthClient {
-  async signUp(_: SignUpParams): Promise<{ error?: string }> {
-    // Make API request
+  async signUp(sinUpParams: SignUpParams): Promise<{ error?: string }> {
+    // アカウント新規登録API呼び出し
+    try {
+      const response = await axios.post('http://localhost:8080/auth/register', {
+        firstName: sinUpParams.firstName,
+        lastName: sinUpParams.lastName,
+        email: sinUpParams.email,
+        password: sinUpParams.password
+      });
+    } catch (error: any) {
+      // エラーメッセージを取り出して返す
+      console.log(error);
+      const errorMessage =
+        error.response?.data?.message || 'サインアップ中にエラーが発生しました';
+      return { error: errorMessage };
+    }
 
     // We do not handle the API, so we'll just generate a token and store it in localStorage.
     const token = generateToken();
     localStorage.setItem('custom-auth-token', token);
 
+    // 成功時はエラーなし
     return {};
   }
 
