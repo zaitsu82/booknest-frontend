@@ -7,6 +7,10 @@ import { AuthGuard } from '@/components/auth/auth-guard';
 import { MainNav } from '@/components/dashboard/layout/main-nav';
 import { SideNav } from '@/components/dashboard/layout/side-nav';
 
+export const metadata = {
+  title: "【読書管理アプリ】 本の登録 "
+};
+
 interface LayoutProps {
   children: React.ReactNode;
 }
