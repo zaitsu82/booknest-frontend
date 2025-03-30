@@ -24,6 +24,11 @@ export interface SignUpParams {
   password: string;
 }
 
+interface SignUpResponse {
+  message: string;
+  token: string;
+}
+
 export interface SignInWithOAuthParams {
   provider: 'google' | 'discord';
 }
@@ -38,27 +43,28 @@ export interface ResetPasswordParams {
 }
 
 class AuthClient {
-  async signUp(sinUpParams: SignUpParams): Promise<{ error?: string }> {
+  async signUp(signUpParams: SignUpParams): Promise<{ error?: string }> {
     // アカウント新規登録API呼び出し
     try {
-      const response = await axios.post('http://localhost:8080/auth/register', {
-        firstName: sinUpParams.firstName,
-        lastName: sinUpParams.lastName,
-        email: sinUpParams.email,
-        password: sinUpParams.password
+      const response = await axios.post<SignUpResponse>('http://localhost:8080/auth/register', {
+        firstName: signUpParams.firstName,
+        lastName: signUpParams.lastName,
+        email: signUpParams.email,
+        password: signUpParams.password
       });
+      //JWTをローカルストレージに保持
+      const token = response.data.token;
+      if (token) {
+        localStorage.setItem('custome-auth-token', token);
+      } else {
+        return { error: '認証に失敗しました。サポートにお問い合わせください。' };
+      }
     } catch (error: any) {
       // エラーメッセージを取り出して返す
-      console.log(error);
       const errorMessage =
-        error.response?.data?.message || 'サインアップ中にエラーが発生しました';
+        error.response?.data?.message || 'アカウントの登録に失敗しました。';
       return { error: errorMessage };
     }
-
-    // We do not handle the API, so we'll just generate a token and store it in localStorage.
-    const token = generateToken();
-    localStorage.setItem('custom-auth-token', token);
-
     // 成功時はエラーなし
     return {};
   }
