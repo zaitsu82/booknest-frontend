@@ -43,8 +43,9 @@ export interface ResetPasswordParams {
 }
 
 class AuthClient {
+
+  // アカウント新規登録API呼び出し
   async signUp(signUpParams: SignUpParams): Promise<{ error?: string }> {
-    // アカウント新規登録API呼び出し
     try {
       const response = await axios.post<SignUpResponse>('http://localhost:8080/auth/register', {
         firstName: signUpParams.firstName,
@@ -73,10 +74,28 @@ class AuthClient {
     return { error: 'Social authentication not implemented' };
   }
 
+  // サインインAPI呼び出し
   async signInWithPassword(params: SignInWithPasswordParams): Promise<{ error?: string }> {
     const { email, password } = params;
 
-    // Make API request
+    try {
+      const response = await axios.post<SignUpResponse>('http://localhost:8080/auth/login', {
+        email: params.email,
+        password: params.password
+      });
+      //JWTをローカルストレージに保持
+      const token = response.data.token;
+      if (token) {
+        localStorage.setItem('custome-auth-token', token);
+      } else {
+        return { error: '認証に失敗しました。サポートにお問い合わせください。' };
+      }
+    } catch (error: any) {
+      // エラーメッセージを取り出して返す
+      const errorMessage =
+        error.response?.data?.message || 'サインインに失敗しました。';
+      return { error: errorMessage };
+    }
 
     // We do not handle the API, so we'll check if the credentials match with the hardcoded ones.
     if (email !== 'sofia@devias.io' || password !== 'Secret1') {
